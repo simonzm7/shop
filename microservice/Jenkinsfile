@@ -36,6 +36,7 @@ pipeline{
      }*/
 	
     stages{
+
         stage('Checkout') {
             steps {
                 echo '------------>Checkout from Git Microservice<------------'
@@ -53,7 +54,6 @@ pipeline{
                 )*/
 
                 dir("${PROJECT_PATH_BACK}"){
-                    sh 'chmod +x ./gradlew'
                     sh './gradlew clean'
                 }
             }
