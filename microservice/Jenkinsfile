@@ -3,12 +3,7 @@ pipeline{
 	// any -> tomaria slave 5 u 8
 	// Para mobile se debe especificar el slave -> {label 'Slave_Mac'}
 	// Para proyectos de arus se debe tomar el slave 6 o 7 -> {label 'Slave6'} o {label 'Slave7'}
-    agent {
-        node {
-            label 'any'
-             echo '${pwd()}'
-        }
-    }
+    agent any
 	
     options {
         buildDiscarder(logRotator(numToKeepStr: '5'))
@@ -45,7 +40,7 @@ pipeline{
             steps {
                 echo '------------>Checkout from Git Microservice<------------'
                 //Esta opción se usa para el checkout sencillo de un microservicio
-
+                echo '----- PWD --- ${pwd()}'
                 gitCheckout(
                     urlProject:'https://github.com/simonzm7/shop.git',
                     branchProject: "${BRANCH_NAME}",
