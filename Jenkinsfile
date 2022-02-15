@@ -8,7 +8,6 @@ pipeline{
     options {
         buildDiscarder(logRotator(numToKeepStr: '5'))
         disableConcurrentBuilds()
-        gitLabConnection('GitCeiba')
     }
 	
     environment {
@@ -129,10 +128,6 @@ pipeline{
                 body:"Build failed in Jenkins: Project: ${env.JOB_NAME} Build /n Number: ${env.BUILD_NUMBER} URL de build: ${env.BUILD_NUMBER}/n/nPlease go to ${env.BUILD_URL} and verify the build",
                 subject: "ERROR CI: ${env.JOB_NAME}"
             )
-            updateGitlabCommitStatus name: 'IC Jenkins', state: 'failed'
-        }
-        success {
-            updateGitlabCommitStatus name: 'IC Jenkins', state: 'success'
         }
     }	
 }
