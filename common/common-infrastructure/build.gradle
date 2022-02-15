@@ -19,3 +19,7 @@ dependencies {
 
     implementation project(":common:common-domain")
 }
+
+bootJar {
+    enabled = false
+}

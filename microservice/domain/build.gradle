@@ -58,3 +58,6 @@ test {
     useJUnitPlatform()
     finalizedBy jacocoTestReport
 }
+bootJar {
+    enabled = false
+}

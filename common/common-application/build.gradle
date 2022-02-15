@@ -10,3 +10,6 @@ dependencies {
     implementation project.ext.springtxt
 }
 
+bootJar {
+    enabled = false
+}
