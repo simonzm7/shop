@@ -48,10 +48,6 @@ pitest {
     useClasspathFile = true
 }
 
-test {
-    useJUnitPlatform()
-    finalizedBy jacocoTestReport
-}
 bootJar {
     enabled = false
 }
