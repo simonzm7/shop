@@ -12,7 +12,7 @@ pipeline{
     }
 	
     environment {
-        PROJECT_PATH_BACK = ''
+        PROJECT_PATH_BACK = '.'
         BRANCH_NAME = 'develop'
     }
 	
@@ -24,6 +24,8 @@ pipeline{
     tools {
         jdk 'JDK13_Centos'
     }
+
+
 	
     // Parametros disponibles en jenkins
      /*parameters{
