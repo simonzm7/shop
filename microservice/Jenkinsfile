@@ -40,7 +40,6 @@ pipeline{
             steps {
                 echo '------------>Checkout from Git Microservice<------------'
                 //Esta opción se usa para el checkout sencillo de un microservicio
-                echo '----- PWD --- ${pwd()}'
                 gitCheckout(
                     urlProject:'https://github.com/simonzm7/shop.git',
                     branchProject: "${BRANCH_NAME}",
@@ -58,6 +57,37 @@ pipeline{
                     sh './gradlew clean'
                 }
             }
+        }
+
+
+        stage('Build'){
+            parallel {
+                stage('Backend Build'){
+                    steps{
+                        echo "------------>Backend Compilation<------------"
+                        dir("${PROJECT_PATH_BACK}"){
+                            sh './gradlew build -x test'
+                        }
+                    }
+                }
+            }
+         }
+
+        stage('Static Code Analysis') {
+            environment {
+                SONARSCANNER = "${tool name: 'SonarScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner"
+            }
+            steps{
+                echo '------------>Static Code Analysis<------------'
+                withSonarQubeEnv('Sonar') {
+                    sh "${env.SONARSCANNER} -Dsonar.projectKey=co.com.ceiba.adn:shop-juan.monsalve.${BRANCH_NAME} -Dsonar.projectName=ceibaADN-Shop(juan.monsalve).${BRANCH_NAME} -Dproject.settings=./sonar-project.properties"
+                }
+                echo '------------>Quality Gates Checkout<------------'
+                sleep 5
+                timeout(time: 1, unit: 'MINUTES') {
+                    waitForQualityGate abortPipeline: true
+                }
+			}
         }
 
         stage('Unit Testing'){
@@ -88,35 +118,7 @@ pipeline{
                 */
             }
         }
-        stage('Static Code Analysis') {
-            environment {
-                SONARSCANNER = "${tool name: 'SonarScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner"
-            }
-            steps{
-                echo '------------>Static Code Analysis<------------'
-                withSonarQubeEnv('Sonar') {
-                    sh "${env.SONARSCANNER} -Dsonar.projectKey=co.com.ceiba.adn:shop-juan.monsalve.${BRANCH_NAME} -Dsonar.projectName=ceibaADN-Shop(juan.monsalve).${BRANCH_NAME} -Dproject.settings=./sonar-project.properties"
-                }
-                echo '------------>Quality Gates Checkout<------------'
-                sleep 5
-                timeout(time: 1, unit: 'MINUTES') {
-                    waitForQualityGate abortPipeline: true
-                }
-			}
-        }
 
-        stage('Build'){
-            parallel {
-                stage('Backend Build'){
-                    steps{
-                        echo "------------>Backend Compilation<------------"
-                        dir("${PROJECT_PATH_BACK}"){
-                            sh './gradlew build -x test'
-                        }
-                    }
-                }
-            }
-         }
     }
 	
     post {
