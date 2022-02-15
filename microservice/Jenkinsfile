@@ -12,7 +12,7 @@ pipeline{
     }
 	
     environment {
-        PROJECT_PATH_BACK = 'microservice'
+        PROJECT_PATH_BACK = '.'
         BRANCH_NAME = 'develop'
     }
 	
@@ -37,19 +37,19 @@ pipeline{
     stages{
         stage('Checkout') {
             steps {
-                echo '------------>Checkout desde Git Microservice<------------'
+                echo '------------>Checkout from Git Microservice<------------'
                 //Esta opción se usa para el checkout sencillo de un microservicio
-                gitCheckout(
-                    urlProject:'',
+                /*gitCheckout(
+                    urlProject:'https://github.com/simonzm7/shop/tree/develop/microservice',
                     branchProject: "${BRANCH_NAME}",
-                )
+                )*/
 
                 //Esta opción se usa cuando el comun está centralizado para varios microservicios
-                /*gitCheckoutWithComun(
-                    urlProject:'<url repositorio proyecto>',
-                    branchProject: '${BRANCH_NAME}',
-                    urlComun: '<url repositorio proyecto comun>'
-                )*/
+                gitCheckoutWithComun(
+                    urlProject:'https://github.com/simonzm7/shop/tree/develop/microservice',
+                    branchProject: "${BRANCH_NAME}",
+                    urlComun: 'https://github.com/simonzm7/shop/tree/develop/common'
+                )
 
                 dir("${PROJECT_PATH_BACK}"){
                     sh 'chmod +x ./gradlew'
@@ -58,7 +58,7 @@ pipeline{
             }
         }
 
-        stage('Compilacion y Test Unitarios'){
+        stage('Unit Testing'){
             // El "parallel" es si vamos a correr los test del frontend en paralelo con los test de backend, se configura en otro stage dentro de parallel
             parallel {
                 stage('Test- Backend'){
