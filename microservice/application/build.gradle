@@ -2,17 +2,8 @@ buildscript {
     repositories {
         mavenCentral()
     }
-    configurations.maybeCreate('pitest')
-    dependencies {
-        pitest 'org.pitest:pitest-junit5-plugin:0.12'
-    }
 }
 
-plugins {
-    id 'info.solidsoft.pitest'
-}
-
-apply plugin: 'jacoco'
 
 repositories {
     mavenCentral()
@@ -38,14 +29,6 @@ dependencies {
     implementation project(':common:common-application')
 
     implementation project.ext.springjdbc
-}
-
-pitest {
-    testPlugin = 'junit5'
-    junit5PluginVersion = '0.14'
-    testSourceSets = [sourceSets.test]
-    mainSourceSets = [sourceSets.main]
-    useClasspathFile = true
 }
 
 bootJar {
