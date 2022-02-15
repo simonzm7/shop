@@ -1,0 +1,1 @@
+INSERT INTO users(id, country_id,name,email,password) VALUES(1,'0000000001','name', 'email0@email.com', '123456')

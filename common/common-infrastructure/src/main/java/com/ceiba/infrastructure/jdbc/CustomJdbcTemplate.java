@@ -21,7 +21,7 @@ import java.math.BigInteger;
 @Slf4j
 public class CustomJdbcTemplate {
 
-    private final String MAPPING_PARAMETERS_ERR_MESSAGE = "Error mapping parameters";
+    private static final String MAPPING_PARAMETERS_ERR_MESSAGE = "Error mapping parameters";
 
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 

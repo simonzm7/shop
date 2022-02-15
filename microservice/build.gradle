@@ -13,7 +13,6 @@ plugins {
 
 group = 'com.ceiba'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '13'
 
 
 allprojects {
@@ -21,6 +20,9 @@ allprojects {
 	apply plugin: 'org.springframework.boot'
 	apply plugin: 'io.spring.dependency-management'
 	apply plugin: 'java'
+
+	sourceCompatibility = '11'
+
 
 	tasks.withType(JavaCompile) { options.encoding = 'UTF-8' }
 	tasks.withType(Test) { systemProperty "file.encoding", "UTF-8" }
@@ -44,7 +46,8 @@ allprojects {
 			'org.springframework:spring-tx',
 			'org.springframework:spring-context']
 
-
+	project.ext.flyway = ["org.flywaydb:flyway-core:5.2.1"]
+	project.ext.flywaytest = ["org.flywaydb.flyway-test-extensions:flyway-spring-test:5.2.1"]
 
 	configurations {
 		runtime.exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
@@ -64,7 +67,7 @@ dependencies {
 	implementation project.ext.springbootweb
 	testImplementation project.ext.springtest
 	testImplementation project.ext.springsecuritytest
-
+	runtimeOnly project.ext.h2
 	implementation project(":infrastructure")
 	implementation project(":application")
 	implementation project(":domain")

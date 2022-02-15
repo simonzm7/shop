@@ -18,7 +18,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @Slf4j
 public class HandlerException {
 
-    private final String INTERNAL_ERR_MESSAGE = "Internal error, please contact support";
+    private static final String INTERNAL_ERR_MESSAGE = "Internal error, please contact support";
 
     private static final ConcurrentHashMap<String, Integer> STATUS_CODE = new ConcurrentHashMap<>();
 

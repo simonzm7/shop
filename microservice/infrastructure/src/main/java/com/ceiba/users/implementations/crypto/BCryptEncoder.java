@@ -9,14 +9,14 @@ import com.ceiba.domain.validation.InputValidation;
 @RequiredArgsConstructor
 public class BCryptEncoder {
 
-    private final int PASSWORD_LEN = 6;
-    private final String PASSWORD_LEN_MESSAGE = String.format("Password minimum length must be %s", this.PASSWORD_LEN);
-    private final String PASSWORD_REQUIRED_MESSAGE = "Password can not be null";
+    private static final int PASSWORD_LEN = 6;
+    private static final String PASSWORD_LEN_MESSAGE = String.format("Password minimum length must be %s", PASSWORD_LEN);
+    private static final String PASSWORD_REQUIRED_MESSAGE = "Password can not be null";
     private final BCryptPasswordEncoder encoder;
 
     public String encodePassword(String rawPassword){
-        InputValidation.notNull(rawPassword, this.PASSWORD_REQUIRED_MESSAGE);
-        InputValidation.isMinLength(rawPassword.length(), this.PASSWORD_LEN, this.PASSWORD_LEN_MESSAGE);
+        InputValidation.notNull(rawPassword, PASSWORD_REQUIRED_MESSAGE);
+        InputValidation.isMinLength(rawPassword.length(), PASSWORD_LEN, PASSWORD_LEN_MESSAGE);
         return this.encoder.encode(rawPassword);
     }
 

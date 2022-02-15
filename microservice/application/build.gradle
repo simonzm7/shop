@@ -11,7 +11,6 @@ repositories {
 
 group = 'com.ceiba'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '13'
 
 dependencies {
 

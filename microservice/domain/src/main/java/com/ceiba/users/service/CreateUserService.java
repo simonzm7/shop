@@ -13,7 +13,7 @@ import java.math.BigInteger;
 @RequiredArgsConstructor
 public class CreateUserService {
 
-    private final String USER_EXISTS_ERR_MESSAGE = "User already exists";
+    private static final String USER_EXISTS_ERR_MESSAGE = "User already exists";
 
     private final UserDao userDao;
     private final UserRepository userRepository;
@@ -21,7 +21,7 @@ public class CreateUserService {
     private void validateIfUserExists(String email, String countryId) {
         boolean exists = this.userDao.existsUserByEmailOrCountryId(email, countryId);
         if (exists){
-            throw new DuplicatedException(this.USER_EXISTS_ERR_MESSAGE);
+            throw new DuplicatedException(USER_EXISTS_ERR_MESSAGE);
         }
     }
 
