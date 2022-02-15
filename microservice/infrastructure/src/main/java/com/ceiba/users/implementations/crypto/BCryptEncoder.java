@@ -1,0 +1,26 @@
+package com.ceiba.users.implementations.crypto;
+
+
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Component;
+import com.ceiba.domain.validation.InputValidation;
+@Component
+@RequiredArgsConstructor
+public class BCryptEncoder {
+
+    private final int PASSWORD_LEN = 6;
+    private final String PASSWORD_LEN_MESSAGE = String.format("Password minimum length must be %s", this.PASSWORD_LEN);
+    private final String PASSWORD_REQUIRED_MESSAGE = "Password can not be null";
+    private final BCryptPasswordEncoder encoder;
+
+    public String encodePassword(String rawPassword){
+        InputValidation.notNull(rawPassword, this.PASSWORD_REQUIRED_MESSAGE);
+        InputValidation.isMinLength(rawPassword.length(), this.PASSWORD_LEN, this.PASSWORD_LEN_MESSAGE);
+        return this.encoder.encode(rawPassword);
+    }
+
+    public boolean comparePasswords(String rawPassword, String encodedPassword){
+        return this.encoder.matches(rawPassword, encodedPassword);
+    }
+}

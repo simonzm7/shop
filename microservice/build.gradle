@@ -1,0 +1,98 @@
+buildscript {
+	repositories {
+		mavenCentral()
+	}
+	configurations.maybeCreate('pitest')
+	dependencies {
+		pitest 'org.pitest:pitest-junit5-plugin:0.12'
+	}
+}
+
+plugins {
+	id 'org.springframework.boot' version '2.6.3'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+	id 'info.solidsoft.pitest' version '1.7.0'
+
+}
+
+group = 'com.ceiba'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+
+allprojects {
+
+	apply plugin: 'org.springframework.boot'
+	apply plugin: 'io.spring.dependency-management'
+	apply plugin: 'java'
+
+	project.ext.springbootweb = ['org.springframework.boot:spring-boot-starter-web']
+	project.ext.springjdbc = ['org.springframework.boot:spring-boot-starter-data-jdbc']
+	project.ext.springsecurity = ['org.springframework.boot:spring-boot-starter-security']
+
+	project.ext.lombock = ['org.projectlombok:lombok']
+
+	project.ext.h2 = ['com.h2database:h2']
+	project.ext.pgsql = ['org.postgresql:postgresql']
+
+	project.ext.springtest = ['org.springframework.boot:spring-boot-starter-test']
+	project.ext.springsecuritytest = ['org.springframework.security:spring-security-test']
+
+	project.ext.springtxt = [
+			'org.springframework:spring-tx',
+			'org.springframework:spring-context']
+
+
+	bootJar {
+		enabled = false
+	}
+
+}
+
+
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation project.ext.springbootweb
+	testImplementation project.ext.springtest
+	testImplementation project.ext.springsecuritytest
+
+	implementation project(":infrastructure")
+	implementation project(":application")
+	implementation project(":domain")
+	implementation project(":common:common-infrastructure")
+
+}
+
+pitest {
+	testPlugin = 'junit5'
+	junit5PluginVersion = '0.14'
+	testSourceSets = [sourceSets.test]
+	mainSourceSets = [sourceSets.main]
+	useClasspathFile = true
+}
+
+
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+
+test {
+	useJUnitPlatform()
+}
+
+
+springBoot{
+	mainClass = 'com.ceiba.Application'
+}
