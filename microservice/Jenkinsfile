@@ -39,6 +39,8 @@ pipeline{
             steps {
                 echo '------------>Checkout from Git Microservice<------------'
                 //Esta opción se usa para el checkout sencillo de un microservicio
+                def workspace = pwd()
+                echo '${workspace}'
                 gitCheckout(
                     urlProject:'https://github.com/simonzm7/shop.git',
                     branchProject: "${BRANCH_NAME}",
@@ -52,8 +54,8 @@ pipeline{
                 )*/
 
                 dir("${PROJECT_PATH_BACK}"){
-                    sh 'chmod +x microservice/gradlew'
-                    sh 'microservice/gradlew clean'
+                    sh 'chmod +x ./gradlew'
+                    sh './gradlew clean'
                 }
             }
         }
