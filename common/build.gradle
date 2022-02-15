@@ -25,6 +25,10 @@ allprojects {
 
 	project.ext.lombock = ['org.projectlombok:lombok']
 
+	configurations {
+		runtime.exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+
 
 }
 bootJar {

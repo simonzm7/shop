@@ -45,6 +45,9 @@ allprojects {
 			'org.springframework:spring-tx',
 			'org.springframework:spring-context']
 
+	configurations {
+		runtime.exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
 
 	bootJar {
 		enabled = false
