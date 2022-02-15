@@ -15,7 +15,7 @@ apply plugin: 'jacoco'
 
 group = 'com.ceiba'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '13'
+sourceCompatibility = '11'
 
 
 
@@ -26,7 +26,9 @@ repositories {
 dependencies {
 
     testImplementation project.ext.springtest
-
+    testImplementation project.ext.mockitocore
+    testImplementation project.ext.mockitoinline
+    testImplementation project.ext.mockitojupiter
 
     compileOnly project.ext.lombock
     annotationProcessor project.ext.lombock

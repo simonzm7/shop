@@ -13,7 +13,7 @@ plugins {
 
 group = 'com.ceiba'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '13'
+sourceCompatibility = '11'
 
 
 allprojects {
@@ -29,6 +29,9 @@ allprojects {
 	project.ext.springjdbc = ['org.springframework.boot:spring-boot-starter-data-jdbc']
 	project.ext.springsecurity = ['org.springframework.boot:spring-boot-starter-security']
 
+	project.ext.mockitocore = ['org.mockito:mockito-core:3.11.2']
+	project.ext.mockitoinline = ['org.mockito:mockito-inline:3.11.2']
+	project.ext.mockitojupiter = ['org.mockito:mockito-junit-jupiter:3.11.2']
 	project.ext.lombock = ['org.projectlombok:lombok']
 
 	project.ext.h2 = ['com.h2database:h2']
@@ -40,6 +43,8 @@ allprojects {
 	project.ext.springtxt = [
 			'org.springframework:spring-tx',
 			'org.springframework:spring-context']
+
+
 
 	configurations {
 		runtime.exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'

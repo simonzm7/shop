@@ -14,7 +14,7 @@ import java.math.BigInteger;
 @RestController
 @RequestMapping("users")
 @RequiredArgsConstructor
-public class UserController {
+public class UserCommandController {
 
     private final BCryptEncoder encoder;
     private final CreateUserHandler createUserHandler;
