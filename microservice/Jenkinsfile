@@ -3,7 +3,12 @@ pipeline{
 	// any -> tomaria slave 5 u 8
 	// Para mobile se debe especificar el slave -> {label 'Slave_Mac'}
 	// Para proyectos de arus se debe tomar el slave 6 o 7 -> {label 'Slave6'} o {label 'Slave7'}
-    agent any
+    agent {
+        node {
+            label 'any'
+             echo '${pwd()}'
+        }
+    }
 	
     options {
         buildDiscarder(logRotator(numToKeepStr: '5'))
@@ -12,7 +17,7 @@ pipeline{
     }
 	
     environment {
-        PROJECT_PATH_BACK = '.'
+        PROJECT_PATH_BACK = './microservice'
         BRANCH_NAME = 'develop'
     }
 	
@@ -24,7 +29,6 @@ pipeline{
     tools {
         jdk 'JDK13_Centos'
     }
-
 
 	
     // Parametros disponibles en jenkins
