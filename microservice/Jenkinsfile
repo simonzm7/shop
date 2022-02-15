@@ -66,6 +66,7 @@ pipeline{
                     steps{
                         echo "------------>Backend Compilation<------------"
                         dir("${PROJECT_PATH_BACK}"){
+                            sh './gradlew --stop'
                             sh './gradlew build -x test'
                         }
                     }
