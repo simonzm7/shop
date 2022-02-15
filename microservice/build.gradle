@@ -29,6 +29,9 @@ allprojects {
 	apply plugin: 'io.spring.dependency-management'
 	apply plugin: 'java'
 
+	tasks.withType(JavaCompile) { options.encoding = 'UTF-8' }
+	tasks.withType(Test) { systemProperty "file.encoding", "UTF-8" }
+
 	project.ext.springbootweb = ['org.springframework.boot:spring-boot-starter-web']
 	project.ext.springjdbc = ['org.springframework.boot:spring-boot-starter-data-jdbc']
 	project.ext.springsecurity = ['org.springframework.boot:spring-boot-starter-security']

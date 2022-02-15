@@ -9,6 +9,7 @@ repositories {
 
 dependencies {
     implementation project.ext.springtxt
+    testImplementation project.ext.springtest
 }
 bootJar {
     enabled = false

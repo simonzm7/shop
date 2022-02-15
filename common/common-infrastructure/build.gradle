@@ -17,6 +17,8 @@ dependencies {
     runtimeOnly project.ext.pgsql
     implementation project.ext.springjdbc
 
+    testImplementation project.ext.springtest
+
     implementation project(":common:common-domain")
 }
 
