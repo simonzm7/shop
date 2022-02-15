@@ -41,7 +41,7 @@ pipeline{
                 //Esta opción se usa para el checkout sencillo de un microservicio
                 gitCheckout(
                     urlProject:'',
-                    branchProject: '${BRANCH_NAME}',
+                    branchProject: "${BRANCH_NAME}",
                 )
 
                 //Esta opción se usa cuando el comun está centralizado para varios microservicios
@@ -91,11 +91,11 @@ pipeline{
                 SONARSCANNER = "${tool name: 'SonarScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner"
             }
             steps{
-                echo '------------>Análisis de código estático<------------'
+                echo '------------>Static Code Analysis<------------'
                 withSonarQubeEnv('Sonar') {
-                    sh "${env.SONARSCANNER} -Dsonar.projectKey=.${BRANCH_NAME} -Dsonar.projectName=${BRANCH_NAME} -Dproject.settings=./sonar-project.properties"
+                    sh "${env.SONARSCANNER} -Dsonar.projectKey=co.com.ceiba.adn:shop-juan.monsalve.${BRANCH_NAME} -Dsonar.projectName=ceibaADN-Shop(juan.monsalve).${BRANCH_NAME} -Dproject.settings=./sonar-project.properties"
                 }
-                echo '------------>Revision de Quality Gates<------------'
+                echo '------------>Quality Gates Checkout<------------'
                 sleep 5
                 timeout(time: 1, unit: 'MINUTES') {
                     waitForQualityGate abortPipeline: true
@@ -105,9 +105,9 @@ pipeline{
 
         stage('Build'){
             parallel {
-                stage('construcción Backend'){
+                stage('Backend Build'){
                     steps{
-                        echo "------------>Compilación backend<------------"
+                        echo "------------>Backend Compilation<------------"
                         dir("${PROJECT_PATH_BACK}"){
                             sh './gradlew build -x test'
                         }
