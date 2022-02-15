@@ -39,17 +39,17 @@ pipeline{
             steps {
                 echo '------------>Checkout from Git Microservice<------------'
                 //Esta opción se usa para el checkout sencillo de un microservicio
-                /*gitCheckout(
-                    urlProject:'https://github.com/simonzm7/shop/tree/develop/microservice',
+                gitCheckout(
+                    urlProject:'https://github.com/simonzm7/shop.git',
                     branchProject: "${BRANCH_NAME}",
-                )*/
+                )
 
                 //Esta opción se usa cuando el comun está centralizado para varios microservicios
-                gitCheckoutWithComun(
+                /*gitCheckoutWithComun(
                     urlProject:'https://github.com/simonzm7/shop/tree/develop/microservice',
                     branchProject: "${BRANCH_NAME}",
                     urlComun: 'https://github.com/simonzm7/shop/tree/develop/common'
-                )
+                )*/
 
                 dir("${PROJECT_PATH_BACK}"){
                     sh 'chmod +x ./gradlew'
