@@ -29,6 +29,8 @@ allprojects {
 		runtime.exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
 
+	test.enabled = false
+
 
 }
 bootJar {
