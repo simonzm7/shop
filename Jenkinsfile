@@ -89,7 +89,7 @@ pipeline{
             steps{
                 echo '------------>Static Code Analysis<------------'
                 withSonarQubeEnv('Sonar') {
-                    sh "${env.SONARSCANNER} -Dsonar.projectKey=co.com.ceiba.adn:shop-juan.monsalve.${BRANCH_NAME} -Dsonar.projectName=CeibaADN-Shop(juan.monsalve).${BRANCH_NAME} -Dproject.settings=./sonar-project.properties"
+                    sh "${env.SONARSCANNER} -Dsonar.projectKey=co.com.ceiba.adn:shop-juan.monsalve.${BRANCH_NAME} -Dsonar.projectName=CeibaADN-Shop.${BRANCH_NAME} -Dproject.settings=./sonar-project.properties"
                 }
                 echo '------------>Quality Gates Checkout<------------'
                 sleep 5
