@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 class LoginUserServiceTest {
 
     @Test

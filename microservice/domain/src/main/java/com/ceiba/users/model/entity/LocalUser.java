@@ -3,11 +3,12 @@ package com.ceiba.users.model.entity;
 import com.ceiba.domain.validation.InputValidation;
 import com.ceiba.users.model.entity.common.CommonVariables;
 import lombok.Data;
+import lombok.Getter;
 
 import java.util.Locale;
 
 
-@Data
+@Getter
 public class LocalUser {
 
     private static final int DNI_MAX_LENGTH = 10;

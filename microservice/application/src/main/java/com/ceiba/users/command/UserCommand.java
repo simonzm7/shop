@@ -2,9 +2,10 @@ package com.ceiba.users.command;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Data
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserCommand {
@@ -13,4 +14,8 @@ public class UserCommand {
     private String name;
     private String email;
     private String password;
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }

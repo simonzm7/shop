@@ -4,13 +4,11 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.ceiba.infrastructure.exception.TechnicalException;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
 import com.auth0.jwt.JWT;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
-import java.util.stream.Collectors;
 
 @Component
 public class JwtUtil {

@@ -23,9 +23,5 @@ public class UserCommandController {
         return this.createUserHandler.execute(command);
     }
 
-    @GetMapping
-    public String getProfile(){
-        return "Hello World";
-    }
 
 }
