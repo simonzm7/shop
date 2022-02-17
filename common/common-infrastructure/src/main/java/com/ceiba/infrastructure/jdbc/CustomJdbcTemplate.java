@@ -4,7 +4,6 @@ package com.ceiba.infrastructure.jdbc;
 import com.ceiba.infrastructure.exception.TechnicalException;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -18,7 +17,6 @@ import java.math.BigInteger;
 @Repository
 @RequiredArgsConstructor
 @Getter
-@Slf4j
 public class CustomJdbcTemplate {
 
     private static final String MAPPING_PARAMETERS_ERR_MESSAGE = "Error mapping parameters";
@@ -48,6 +46,11 @@ public class CustomJdbcTemplate {
         KeyHolder keyHolder = new GeneratedKeyHolder();
         this.namedParameterJdbcTemplate.update(sql, parameterSource, keyHolder, new String[] { "id" });
         return BigInteger.valueOf(keyHolder.getKey().longValue());
+    }
+
+    public void update(String sql, Object model){
+        MapSqlParameterSource parameterSource = this.createMapParameters(model);
+        this.namedParameterJdbcTemplate.update(sql, parameterSource);
     }
 
 }

@@ -8,7 +8,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.web.HttpMediaTypeException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -20,7 +22,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class HandlerException {
 
     private static final String INTERNAL_ERR_MESSAGE = "Internal error, please contact support";
-
+    private static final String MISSING_BODY_ERROR = "Missing body data";
     private static final ConcurrentHashMap<String, Integer> STATUS_CODE = new ConcurrentHashMap<>();
 
     public HandlerException(){
@@ -31,7 +33,7 @@ public class HandlerException {
         STATUS_CODE.put(DuplicatedException.class.getSimpleName(), HttpStatus.BAD_REQUEST.value());
         STATUS_CODE.put(TechnicalException.class.getSimpleName(), HttpStatus.BAD_REQUEST.value());
         STATUS_CODE.put(IncorrectCredentials.class.getSimpleName(), HttpStatus.BAD_REQUEST.value());
-
+        STATUS_CODE.put(HttpMessageNotReadableException.class.getSimpleName(), HttpStatus.BAD_REQUEST.value());
     }
 
     @ExceptionHandler({Exception.class})
@@ -45,6 +47,9 @@ public class HandlerException {
             log.error(exceptionName,exception);
             error = new Error(exceptionName, INTERNAL_ERR_MESSAGE, dateException);
             return new ResponseEntity<>(error,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        else if(exceptionName == HttpMessageNotReadableException.class.getSimpleName()){
+            exceptionMessage = MISSING_BODY_ERROR;
         }
         error = new Error(exceptionName, exceptionMessage, dateException);
         return new ResponseEntity<>(error, HttpStatus.valueOf(statusCode));

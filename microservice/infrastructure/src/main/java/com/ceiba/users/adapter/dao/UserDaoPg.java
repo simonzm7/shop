@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.stereotype.Component;
 
+import java.math.BigInteger;
 import java.util.Optional;
 
 
@@ -37,5 +38,14 @@ public class UserDaoPg implements UserDao {
                     .query(sql,  parameterSource, new UserMapper())
                 .stream().findFirst();
 
+    }
+
+    @Override
+    public BigInteger findUserIdByEmail(String email) {
+        String sql = "SELECT id from users WHERE email = :email";
+        MapSqlParameterSource parameterSource = new MapSqlParameterSource();
+        parameterSource.addValue("email", email);
+        return this.customJdbcTemplate.getNamedParameterJdbcTemplate()
+                .queryForObject(sql,  parameterSource, BigInteger.class);
     }
 }
