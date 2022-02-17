@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -29,10 +30,11 @@ public class HandlerException {
         STATUS_CODE.put(NullException.class.getSimpleName(), HttpStatus.NOT_FOUND.value());
         STATUS_CODE.put(DuplicatedException.class.getSimpleName(), HttpStatus.BAD_REQUEST.value());
         STATUS_CODE.put(TechnicalException.class.getSimpleName(), HttpStatus.BAD_REQUEST.value());
+        STATUS_CODE.put(IncorrectCredentials.class.getSimpleName(), HttpStatus.BAD_REQUEST.value());
 
     }
 
-    @ExceptionHandler(Exception.class)
+    @ExceptionHandler({Exception.class})
     public ResponseEntity<Error> handleException(Exception exception){
         String exceptionName = exception.getClass().getSimpleName();
         String exceptionMessage = exception.getMessage();

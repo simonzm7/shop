@@ -18,6 +18,7 @@ dependencies {
     annotationProcessor project.ext.lombock
 
     implementation project.ext.springbootweb
+    implementation project.ext.springsecurity
 
     compileOnly project.ext.lombock
     annotationProcessor project.ext.lombock

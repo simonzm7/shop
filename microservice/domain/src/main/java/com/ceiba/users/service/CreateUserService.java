@@ -1,6 +1,7 @@
 package com.ceiba.users.service;
 
 import com.ceiba.domain.exception.DuplicatedException;
+import com.ceiba.users.model.dto.LocalUserDto;
 import com.ceiba.users.model.entity.LocalUser;
 import com.ceiba.users.port.dao.UserDao;
 import com.ceiba.users.port.repository.UserRepository;

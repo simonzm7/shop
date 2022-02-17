@@ -24,11 +24,18 @@ dependencies {
 
 
     implementation project.ext.springbootweb
+    implementation project.ext.springsecurity
+    implementation project.ext.springjdbc
+    implementation project.ext.jwt
 
     compileOnly project.ext.lombock
     annotationProcessor project.ext.lombock
 
-    implementation project.ext.springsecurity
+    implementation project(":application")
+    implementation project(":domain")
+    implementation project(":common:common-infrastructure")
+    implementation project(":common:common-application")
+    implementation project(":common:common-domain")
 
     testImplementation project.ext.springsecuritytest
     testImplementation project.ext.springtest
@@ -38,14 +45,6 @@ dependencies {
     testImplementation project.ext.flywaytest
     testImplementation project.ext.h2
 
-    implementation project.ext.springjdbc
-
-
-    implementation project(":application")
-    implementation project(":domain")
-    implementation project(":common:common-infrastructure")
-    implementation project(":common:common-application")
-    implementation project(":common:common-domain")
 
 }
 jacocoTestReport {

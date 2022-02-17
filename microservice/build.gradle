@@ -49,6 +49,8 @@ allprojects {
 	project.ext.flyway = ["org.flywaydb:flyway-core:5.2.1"]
 	project.ext.flywaytest = ["org.flywaydb.flyway-test-extensions:flyway-spring-test:5.2.1"]
 
+	project.ext.jwt = ['com.auth0:java-jwt:3.18.3']
+
 	configurations {
 		runtime.exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}

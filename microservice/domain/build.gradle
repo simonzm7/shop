@@ -24,17 +24,22 @@ repositories {
 
 dependencies {
 
+    implementation project.ext.springbootweb
+    implementation project.ext.springsecurity
+
+    implementation project(':common:common-domain')
+
+    compileOnly project.ext.lombock
+    annotationProcessor project.ext.lombock
+
     testImplementation project.ext.springtest
     testImplementation project.ext.mockitocore
     testImplementation project.ext.mockitoinline
     testImplementation project.ext.mockitojupiter
 
-    compileOnly project.ext.lombock
-    annotationProcessor project.ext.lombock
 
-    implementation project.ext.springbootweb
 
-    implementation project(':common:common-domain')
+
 
 }
 

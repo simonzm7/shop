@@ -4,10 +4,7 @@ import com.ceiba.users.command.UserCommand;
 import com.ceiba.users.command.handler.CreateUserHandler;
 import com.ceiba.users.implementations.crypto.BCryptEncoder;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.math.BigInteger;
 
@@ -24,6 +21,11 @@ public class UserCommandController {
         String encodedPassword = this.encoder.encodePassword(command.getPassword());
         command.setPassword(encodedPassword);
         return this.createUserHandler.execute(command);
+    }
+
+    @GetMapping
+    public String getProfile(){
+        return "Hello World";
     }
 
 }
