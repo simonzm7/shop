@@ -5,17 +5,13 @@ import com.ceiba.domain.exception.NotFoundException;
 import com.ceiba.users.model.dto.LocalUserDto;
 import com.ceiba.users.model.entity.LoginUser;
 import com.ceiba.users.port.dao.UserDao;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Optional;

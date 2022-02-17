@@ -2,13 +2,11 @@ package com.ceiba.users.implementations.crypto;
 
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import com.ceiba.domain.validation.InputValidation;
 @Component
 @RequiredArgsConstructor
-@Slf4j
 public class BCryptEncoder {
 
     private static final int PASSWORD_LEN = 6;
