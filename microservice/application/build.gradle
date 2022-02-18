@@ -27,7 +27,7 @@ dependencies {
 
     implementation project(':domain')
     implementation project(':common:common-application')
-
+    implementation project(':common:common-domain')
     implementation project.ext.springjdbc
 }
 

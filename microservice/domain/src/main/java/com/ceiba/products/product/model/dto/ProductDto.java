@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigInteger;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -17,4 +18,5 @@ public class ProductDto {
     private String productImageUrl;
     private Integer productStock;
     private Integer productDiscount;
+    private String createdAt;
 }
