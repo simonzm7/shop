@@ -11,4 +11,6 @@ public interface ProductDao {
     List<ProductDto> listBestDiscountProducts();
     List<ProductDto> listDiscountProducts();
     List<ProductDto> listByCategory(ProductCategory category);
+    List<ProductDto> listByCategoryAndDeals(ProductCategory category);
+
 }

@@ -2,10 +2,7 @@ package com.ceiba.products.product.controller;
 
 
 import com.ceiba.products.product.model.dto.ProductDto;
-import com.ceiba.products.product.query.ListBestDiscountProductHandler;
-import com.ceiba.products.product.query.ListByCategory;
-import com.ceiba.products.product.query.ListDiscountProductHandler;
-import com.ceiba.products.product.query.ListMyProductsHandler;
+import com.ceiba.products.product.query.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -25,8 +22,15 @@ public class ProductQueryController {
     private final ListBestDiscountProductHandler listBestDiscountProductHandler;
     private final ListDiscountProductHandler listDiscountProductHandler;
     private final ListByCategory listByCategory;
+    private final ListByCategoryAndDeals listByCategoryAndDeals;
+
     private String getUser(){
         return SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+    }
+
+    @GetMapping("/{id}")
+    public void findProduct() {
+
     }
 
     @GetMapping("/me")
@@ -47,5 +51,12 @@ public class ProductQueryController {
     public List<ProductDto> listByCategory(@RequestParam("type") String category){
         return this.listByCategory.execute(category);
     }
+
+    @GetMapping("/category/deals")
+    public List<ProductDto> listByCategoryAndDeals(@RequestParam("type") String category){
+        return this.listByCategoryAndDeals.execute(category);
+    }
+
+
 
 }

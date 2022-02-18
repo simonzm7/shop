@@ -1,6 +1,7 @@
 package com.ceiba.users.config;
 
 
+import com.ceiba.balance.port.repository.BalanceRepository;
 import com.ceiba.users.port.dao.UserDao;
 import com.ceiba.users.port.repository.UserRepository;
 import com.ceiba.users.service.CreateUserService;
@@ -13,8 +14,8 @@ public class BeanService {
 
 
     @Bean
-    public CreateUserService createUserService(UserDao userDao, UserRepository userRepository) {
-        return new CreateUserService(userDao, userRepository);
+    public CreateUserService createUserService(UserDao userDao, UserRepository userRepository, BalanceRepository balanceRepository) {
+        return new CreateUserService(userDao, userRepository, balanceRepository);
     }
 
    @Bean

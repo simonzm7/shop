@@ -44,4 +44,12 @@ public class ProductDaoPg implements ProductDao {
         mapSqlParameterSource.addValue("productCategory", category.toString());
         return this.customJdbcTemplate.getNamedParameterJdbcTemplate().query(sql, mapSqlParameterSource, new ProductMapper());
     }
+
+    @Override
+    public List<ProductDto> listByCategoryAndDeals(ProductCategory category) {
+        String sql = "SELECT id, product_name, description, product_category, product_image_url, product_stock, product_discount, created_at FROM products WHERE product_stock > 0 AND product_discount > 0 AND product_category = :productCategory";
+        MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
+        mapSqlParameterSource.addValue("productCategory", category.toString());
+        return this.customJdbcTemplate.getNamedParameterJdbcTemplate().query(sql, mapSqlParameterSource, new ProductMapper());
+    }
 }

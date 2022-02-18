@@ -22,6 +22,7 @@ import java.util.Date;
 public class AuthorizationFilter extends OncePerRequestFilter {
 
     private static final String LOGIN_PATH = "/login";
+    private static final String SIGNUP_PATH = "/users";
     private static final String CONTENT_TYPE = "application/json";
     private final JwtUtil jwtUtil;
 
@@ -38,7 +39,9 @@ public class AuthorizationFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-       if (!request.getServletPath().equals(LOGIN_PATH)){
+       if (
+               !request.getServletPath().equals(LOGIN_PATH) &&
+                       !request.getServletPath().equals(SIGNUP_PATH)){
             String authHeader = request.getHeader("Authorization");
             if(authHeader != null && !authHeader.isEmpty() && authHeader.startsWith("Bearer ")) {
                 String token = authHeader.substring("Bearer ".length());

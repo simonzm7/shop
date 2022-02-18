@@ -1,5 +1,6 @@
 package com.ceiba.users.model.dto.databuilders;
 
+import com.ceiba.balance.model.dto.BalanceDto;
 import com.ceiba.users.model.dto.LocalUserDto;
 
 import java.math.BigInteger;
@@ -26,7 +27,8 @@ public class LocalUserDtoDataBuilder {
                 this.countryId,
                 this.name,
                 this.email,
-                this.password
+                this.password,
+                new BalanceDto(BigInteger.ONE, 10.0)
         );
     }
 }

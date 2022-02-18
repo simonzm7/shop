@@ -21,3 +21,12 @@ CREATE TABLE products(
     updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     primary key (id)
 );
+
+create table balance (
+ id int(11) not null auto_increment,
+ total_balance decimal(10) not null,
+ user_id  int(11) NOT NULL,
+ created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+ updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+ primary key (id)
+);

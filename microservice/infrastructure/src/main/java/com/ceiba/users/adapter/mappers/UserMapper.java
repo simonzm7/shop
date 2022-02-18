@@ -23,7 +23,8 @@ public class UserMapper implements RowMapper<LocalUserDto> {
                 countryId,
                 name,
                 email,
-                password
+                password,
+                null
         );
     }
 }

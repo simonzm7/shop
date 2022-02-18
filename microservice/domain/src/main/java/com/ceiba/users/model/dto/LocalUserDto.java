@@ -1,5 +1,6 @@
 package com.ceiba.users.model.dto;
 
+import com.ceiba.balance.model.dto.BalanceDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,4 +16,5 @@ public class LocalUserDto {
     private String name;
     private String email;
     private String password;
+    private BalanceDto balance;
 }

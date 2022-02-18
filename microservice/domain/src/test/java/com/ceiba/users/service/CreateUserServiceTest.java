@@ -1,5 +1,6 @@
 package com.ceiba.users.service;
 
+import com.ceiba.balance.port.repository.BalanceRepository;
 import com.ceiba.domain.exception.DuplicatedException;
 import com.ceiba.users.model.entity.Builder.LocalUserDataBuilder;
 import com.ceiba.users.model.entity.LocalUser;
@@ -27,7 +28,9 @@ class CreateUserServiceTest {
         UserDao userDao = Mockito.mock(UserDao.class);
         Mockito.when(userDao.existsUserByEmailOrCountryId(user.getEmail(), user.getCountryId())).thenReturn(true);
         UserRepository userRepository = Mockito.mock(UserRepository.class);
-        CreateUserService createUserService = new CreateUserService(userDao,  userRepository);
+        BalanceRepository balanceRepository = Mockito.mock(BalanceRepository.class);
+
+        CreateUserService createUserService = new CreateUserService(userDao,  userRepository, balanceRepository);
         assertThrows(DuplicatedException.class, () -> createUserService.execute(user));
     }
 
@@ -48,7 +51,9 @@ class CreateUserServiceTest {
         Mockito.when(userDao.existsUserByEmailOrCountryId(user.getEmail(), user.getCountryId())).thenReturn(false);
         Mockito.when(userRepository.save(user)).thenReturn(createdId);
 
-        CreateUserService createUserService = new CreateUserService(userDao,  userRepository);
+        BalanceRepository balanceRepository = Mockito.mock(BalanceRepository.class);
+
+        CreateUserService createUserService = new CreateUserService(userDao,  userRepository, balanceRepository);
 
         BigInteger idUser = createUserService.execute(user);
         assertEquals(createdId, idUser);

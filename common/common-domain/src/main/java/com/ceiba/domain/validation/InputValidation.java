@@ -4,13 +4,15 @@ package com.ceiba.domain.validation;
 import com.ceiba.domain.exception.LengthException;
 import com.ceiba.domain.exception.RequiredException;
 import com.ceiba.domain.exception.TypeException;
+import lombok.NoArgsConstructor;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+
+@NoArgsConstructor
 public class InputValidation {
 
-    private InputValidation() {}
 
     public static void notNull(Object value, String errorMessage){
         if (value == null || value.toString().isBlank() || value.toString().isEmpty()){
