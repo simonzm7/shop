@@ -14,6 +14,7 @@ pipeline{
     environment {
         PROJECT_PATH_BACK = './microservice'
         BRANCH_NAME = 'develop'
+        PROJECT_PATH_FRONT = './microservice/shop-angular'
     }
 	
     triggers {
@@ -40,6 +41,13 @@ pipeline{
             }
         }
 
+		stage('Frontend - Install'){
+			steps {
+				echo "------------>Installation<------------"
+				sh 'npm i'			
+			}
+		}
+
         stage('Unit Testing'){
             parallel {
                 stage('Test- Backend'){
@@ -55,16 +63,16 @@ pipeline{
                         }
                     }
                 }
-                /*
+                
                 stage('Test- Frontend'){
                     steps {
                         echo '------------>Test Frontend<------------'
                         dir("${PROJECT_PATH_FRONT}"){
-                            // comando ejecucion test
+                            sh 'npm run test'
                         }
                     }
                 }
-                */
+                
             }
         }
 
@@ -76,6 +84,14 @@ pipeline{
                         dir("${PROJECT_PATH_BACK}"){
                             sh './gradlew --stop'
                             sh './gradlew build -x test'
+                        }
+                    }
+                }
+                stage('Frontend Build'){
+                    steps{
+                        echo "------------>Frontend Compilation<------------"
+                        dir("${PROJECT_PATH_FRONT}"){
+                            sh 'npm run build'
                         }
                     }
                 }
