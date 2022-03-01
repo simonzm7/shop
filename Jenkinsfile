@@ -44,7 +44,9 @@ pipeline{
 		stage('Frontend - Install'){
 			steps {
 				echo "------------>Installation<------------"
-				sh 'npm i'			
+                    dir("${PROJECT_PATH_FRONT}"){
+                        sh 'npm i'
+                    }		
 			}
 		}
 
