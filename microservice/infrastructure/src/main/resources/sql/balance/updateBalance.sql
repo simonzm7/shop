@@ -1,0 +1,1 @@
+UPDATE balance SET total_balance = :newBalance, updated_at = :updatedAt WHERE id = :id AND user_id = :userId

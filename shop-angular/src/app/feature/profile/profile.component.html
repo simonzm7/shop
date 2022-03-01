@@ -1,0 +1,51 @@
+<div class="container">
+    <div class="modal">
+        <div class="card items-wrapper">
+            <p class="name separator">{{user?.name}}</p>
+            <div class="item-group">
+                <label for="email">Email</label>
+                <p>{{user?.email}}</p>
+            </div>
+            <div class="item-group">
+                <label for="nationalIdentity">National Identity</label>
+                <p>{{user?.countryId}}</p>
+            </div>
+        </div>
+        <div class="card items-wrapper">
+            <div class="balance-header">
+                <h4>Balance</h4>
+                <div class="plus-wrapper"  (click)="toggleModal()">
+                    <img [src]="plusPath" alt="Add" class="plus">
+                </div>
+            </div>
+            <p class="balance">{{user?.balance?.balance}}</p>
+        </div>
+    </div>
+</div>
+<div class="popup-container" *ngIf="modalOpen">
+    <div class="popup-flex">
+        <div class="card balance-card">
+            <div class="balance-header  ">
+                <h4 class="b-title">Add Balance</h4>
+                <img [src]="closePath" alt="close" class="close-modal" (click)="toggleModal()">
+            </div>
+            <form (ngSubmit)="onSubmit()" #balanceForm="ngForm">
+                <input type="text" name="balance" class="formInput balance-input" [(ngModel)]="newBalance" required
+                #balance="ngModel" 
+                [ngClass]="{ errorOutline: balance.invalid && (balance.dirty || balance.touched)}"
+                [pattern]="isNumberPattern"
+                isLessThan="5"
+                >
+                <div *ngIf="balance.invalid && (balance.dirty || balance.touched)" class="alert balance-alert">
+                    <div *ngIf="balance.errors?.['pattern']">
+                        <p class="error-text">Invalid balance format.</p>
+                    </div>
+                    <div *ngIf="balance.errors?.['isLessThan']">
+                        <p class="error-text">New balance must be minimum 5 USD.</p>
+                    </div> 
+                </div>
+                <button type="submit" class="submitBtn" [disabled]="balanceForm.invalid">Add</button>
+            </form>
+        </div>
+    </div>
+</div>

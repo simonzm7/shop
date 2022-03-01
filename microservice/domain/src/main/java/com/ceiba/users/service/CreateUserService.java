@@ -24,6 +24,7 @@ public class CreateUserService {
         if (exists){
             throw new DuplicatedException(USER_EXISTS_ERR_MESSAGE);
         }
+
     }
 
     public BigInteger execute(LocalUser user){

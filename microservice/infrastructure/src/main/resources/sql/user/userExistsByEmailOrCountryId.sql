@@ -1,0 +1,1 @@
+SELECT count(1) FROM users WHERE email = :email OR country_id = :countryId

@@ -1,0 +1,10 @@
+<div class="container">
+    <div class="products-wrapper card-type">
+                <app-product-card *ngFor="let product of products" 
+                [imageUrl]="product.productImageUrl"
+                [cardTitle]="product.productName"
+                cardPrice="50"
+                class="app-product-card"
+                ></app-product-card>
+    </div>
+</div>

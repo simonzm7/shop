@@ -1,0 +1,27 @@
+.container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.products-wrapper {
+    max-width: 1300px;
+    width: 100%;
+    background-color: #fff;
+    border-radius: 7px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.app-product-card{
+    margin: 15px;
+}
+
+@media (max-width: 584px) {
+    .products-wrapper {
+        justify-content: center;
+        max-width: 100%;
+    }
+    
+}

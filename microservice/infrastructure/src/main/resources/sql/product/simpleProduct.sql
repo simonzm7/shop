@@ -1,0 +1,1 @@
+SELECT id, product_name, product_image_url FROM products WHERE id = :productId

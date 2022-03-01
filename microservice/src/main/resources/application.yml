@@ -1,10 +1,15 @@
+jasypt:
+  encryptor:
+    password: secretKey
+    algorithm: PBEWithMD5AndDES
+
 app:
   datasource:
     main:
       driver-class-name: org.postgresql.Driver
       jdbc-url: jdbc:postgresql://localhost:5432/shop
       username: postgres
-      password: ''
+      password: ENC(31AuL1tO9vwBx1JTv8513Q==)
       pool-size: 5
 
 server:

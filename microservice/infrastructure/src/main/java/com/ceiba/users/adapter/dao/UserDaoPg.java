@@ -1,6 +1,7 @@
 package com.ceiba.users.adapter.dao;
 
 import com.ceiba.infrastructure.jdbc.CustomJdbcTemplate;
+import com.ceiba.infrastructure.jdbc.sqlstatement.SqlStatement;
 import com.ceiba.users.adapter.mappers.UserMapper;
 import com.ceiba.users.model.dto.LocalUserDto;
 import com.ceiba.users.port.dao.UserDao;
@@ -18,34 +19,41 @@ public class UserDaoPg implements UserDao {
 
     private final CustomJdbcTemplate customJdbcTemplate;
 
+    @SqlStatement(namespace = "user", value ="userExistsByEmailOrCountryId")
+    private static String sqlExists;
+
+    @SqlStatement(namespace = "user", value ="findByEmail")
+    private static String sqlFindByEmail;
+
+    @SqlStatement(namespace = "user", value ="userIdByEmail")
+    private static String sqlUserIdByEmail;
+
+
     @Override
     public boolean existsUserByEmailOrCountryId(String email, String countryId) {
-        String sql = "SELECT count(1) FROM users WHERE email = :email OR country_id = :countryId";
         MapSqlParameterSource mapSqlParameterSource = new MapSqlParameterSource();
         mapSqlParameterSource.addValue("email", email);
         mapSqlParameterSource.addValue("countryId", countryId);
         return this.customJdbcTemplate
                 .getNamedParameterJdbcTemplate()
-                .queryForObject(sql, mapSqlParameterSource , Boolean.class);
+                .queryForObject(sqlExists, mapSqlParameterSource , Boolean.class);
     }
 
     @Override
     public Optional<LocalUserDto> findByEmail(String email) {
-        String sql = "SELECT * from users WHERE email = :email";
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
         parameterSource.addValue("email", email);
         return this.customJdbcTemplate.getNamedParameterJdbcTemplate()
-                    .query(sql,  parameterSource, new UserMapper())
+                    .query(sqlFindByEmail,  parameterSource, new UserMapper())
                 .stream().findFirst();
 
     }
 
     @Override
     public BigInteger findUserIdByEmail(String email) {
-        String sql = "SELECT id from users WHERE email = :email";
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
         parameterSource.addValue("email", email);
         return this.customJdbcTemplate.getNamedParameterJdbcTemplate()
-                .queryForObject(sql,  parameterSource, BigInteger.class);
+                .queryForObject(sqlUserIdByEmail,  parameterSource, BigInteger.class);
     }
 }

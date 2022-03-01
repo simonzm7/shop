@@ -1,0 +1,48 @@
+/* You can add global styles to this file, and also import other style files */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.formInput{
+    width: 100%;
+    padding: 10px;
+    outline: none;
+    border-radius: 4px;
+    border: none;
+    box-shadow: 0 0 0 1px #c2c2c2;
+    margin-top: 5px;
+    font-size: 16px;
+    &.errorOutline {
+        outline: none;
+        border: 1px solid #d93025;
+    }
+    &:focus {
+        outline: none;
+        border: 1px solid #1f6feb;
+    }
+
+}
+
+.submitBtn {
+    width: 100%;
+    padding: 7px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #1f6feb;
+    border: 1px solid #fff;
+    border-radius: 6px;
+    color: #fff;
+    &:disabled {
+        background-color: #729fe3;
+        cursor: default;
+    }
+}
+
+.card-type {
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #e8e8e8;
+}

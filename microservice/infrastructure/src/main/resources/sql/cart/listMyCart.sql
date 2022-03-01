@@ -1,0 +1,1 @@
+SELECT id, product_id FROM cart WHERE user_id = :userId

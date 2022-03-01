@@ -1,0 +1,1 @@
+INSERT INTO users(country_id, name, email, password) VALUES(:countryId, :name, :email, :password)

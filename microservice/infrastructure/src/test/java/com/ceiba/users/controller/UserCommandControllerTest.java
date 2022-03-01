@@ -48,5 +48,6 @@ class UserCommandControllerTest {
                 .content(objectMapper.writeValueAsString(userCommand)))
                 .andExpect(status().isOk())
                 .andExpect(content().string(USER_ID.toString()));
+
     }
 }

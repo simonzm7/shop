@@ -1,0 +1,1 @@
+SELECT id, product_name, description, product_category, product_image_url, product_stock, product_discount, created_at FROM products WHERE product_stock > 0 AND product_category = :productCategory

@@ -1,0 +1,11 @@
+<div class="container">
+    <div class="products-wrapper card-type">
+                <app-product-card 
+                *ngFor="let category of productCategory" 
+                [imageUrl]="category.imgUrl"
+                [cardTitle]="category.title.toString()"
+                class="app-product-card"
+                (click)="searchCategory(category.title)"
+                ></app-product-card>
+    </div>
+</div>

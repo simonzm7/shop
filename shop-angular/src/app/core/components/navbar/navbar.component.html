@@ -1,0 +1,27 @@
+<div class="nav-container">
+    <div class="nav-flex">
+        <a href="" class="nav-title">SHOP</a>
+        <div class="nav-items" *ngIf="!isAuthenticated; else elseBlock">
+            <a  *ngFor="let item of items"  [routerLink]="item.url" routerLinkActive="active">{{item.name}}</a>
+        </div>
+        <ng-template #elseBlock>
+            <div class="left-nav">
+                <div class="nav-items">
+                    <a  *ngFor="let item of authItems"  [routerLink]="item.url" routerLinkActive="active">{{item.name}}</a>
+                </div>
+                <div class="profile" (click)="togglePopup()">
+                    <div class="icon-wrapper">
+                        <img [src]="profileUrl" alt="" class="profile-img">
+                        <i class="arrow down"></i>
+                    </div>
+                    <div class="popup" *ngIf="popupActive">
+                        <div class="link-margin">
+                            <a  routerLink="/profile" routerLinkActive="active" class="popup-link">Profile</a>
+                            <a class="popup-link signout" (click)="onSignOut()">Sign Out</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+    </div>
+</div>

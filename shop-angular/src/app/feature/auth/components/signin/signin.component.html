@@ -1,0 +1,45 @@
+<title>{{title}}</title>
+<div class="container">
+    <div class="login-wrapper">
+        <div class="wrapper-logo">
+            <p class="logo"> <a class="logo-link" routerLink="/home" routerLinkActive="active">SHOP</a></p>
+        </div>
+        <p class="title">Sign In</p>
+        <div class="login-items">
+            <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+                <div class="input-wrapper">
+                    <label for="email">Email</label>
+                    <input type="text" name="email" class="formInput" [(ngModel)]="loginInput.email" required
+                        #email="ngModel" [ngClass]="{ errorOutline: email.invalid && (email.dirty || email.touched)}"
+                        [pattern]="patterns.email">
+                    <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert">
+                        <div *ngIf="email.errors?.['required']">
+                            <p class="error-text">Email is required.</p>
+                        </div>
+                        <div *ngIf="email.errors?.['pattern']">
+                            <p class="error-text">Invalid email format.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-wrapper">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" class="formInput" [(ngModel)]="loginInput.password" required
+                        minlength="6" #password="ngModel">
+                        <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert">
+                            <div *ngIf="password.errors?.['required']">
+                                <p class="error-text">Password is required.</p>
+                            </div>
+                            <div *ngIf="password.errors?.['minlength']">
+                                <p class="error-text">Password must be at least 6 characters long.</p>
+                            </div>
+                        </div>
+                </div>
+                <button type="submit" class="submitBtn" [disabled]="loginForm.invalid">Sign In</button>
+            </form>
+        </div>
+        <div class="login-items">
+            <p class="signup-text">New on Shop? <a class="signup-link" routerLink="/signup"
+                    routerLinkActive="active">Create an account</a></p>
+        </div>
+    </div>
+</div>

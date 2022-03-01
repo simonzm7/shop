@@ -53,7 +53,7 @@ class CommandBalanceControllerTest {
     void incrementBalance() throws Exception{
         BalanceCommand command = new BalanceCommandDataBuilder().build();
         this.mockMvc.perform(
-                put("/balance")
+                post("/balance")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(this.objectMapper.writeValueAsString(command))
                         .header("Authorization", String.format("Bearer %s", this.jwtToken))

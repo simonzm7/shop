@@ -1,0 +1,1 @@
+SELECT count(1) FROM cart WHERE product_id = :productId AND user_id = :userId

@@ -1,6 +1,7 @@
 package com.ceiba.users.adapter.repository;
 
 import com.ceiba.infrastructure.jdbc.CustomJdbcTemplate;
+import com.ceiba.infrastructure.jdbc.sqlstatement.SqlStatement;
 import com.ceiba.users.model.entity.LocalUser;
 import com.ceiba.users.port.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -12,11 +13,13 @@ import java.math.BigInteger;
 @RequiredArgsConstructor
 public class UserRepositoryPg implements UserRepository {
 
+    @SqlStatement(namespace = "user", value ="saveUser")
+    private static String sqlSave;
+
     private final CustomJdbcTemplate customJdbcTemplate;
 
     @Override
     public BigInteger save(LocalUser localUser) {
-        String sql = "INSERT INTO users(country_id, name, email, password) VALUES(:countryId, :name, :email, :password)";
-        return this.customJdbcTemplate.create(sql, localUser);
+        return this.customJdbcTemplate.create(sqlSave, localUser);
     }
 }

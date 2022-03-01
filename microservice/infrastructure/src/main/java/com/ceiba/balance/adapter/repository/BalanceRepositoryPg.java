@@ -3,6 +3,7 @@ package com.ceiba.balance.adapter.repository;
 import com.ceiba.balance.model.Balance;
 import com.ceiba.balance.port.repository.BalanceRepository;
 import com.ceiba.infrastructure.jdbc.CustomJdbcTemplate;
+import com.ceiba.infrastructure.jdbc.sqlstatement.SqlStatement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -11,17 +12,21 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class BalanceRepositoryPg implements BalanceRepository {
 
+    @SqlStatement(namespace = "balance", value ="saveBalance")
+    private static String sqlSaveBalance;
+
+    @SqlStatement(namespace = "balance", value ="updateBalance")
+    private static String sqlUpdateBalance;
+
     private final CustomJdbcTemplate customJdbcTemplate;
 
     @Override
     public void save(Balance balance) {
-        String sql = "INSERT INTO balance(total_balance, user_id) VALUES(:newBalance, :userId)";
-        this.customJdbcTemplate.create(sql, balance);
+        this.customJdbcTemplate.create(sqlSaveBalance, balance);
     }
 
     @Override
     public void addBalance(Balance balance) {
-        String sql = "UPDATE balance SET total_balance = :newBalance, updated_at = :updatedAt WHERE id = :id AND user_id = :userId";
-        this.customJdbcTemplate.update(sql, balance);
+        this.customJdbcTemplate.update(sqlUpdateBalance, balance);
     }
 }

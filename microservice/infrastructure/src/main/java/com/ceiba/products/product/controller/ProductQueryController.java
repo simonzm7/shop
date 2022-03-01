@@ -28,11 +28,6 @@ public class ProductQueryController {
         return SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
     }
 
-    @GetMapping("/{id}")
-    public void findProduct() {
-
-    }
-
     @GetMapping("/me")
     public List<ProductDto> listMyProducts(){
         return this.myProductsHandler.execute(this.getUser());

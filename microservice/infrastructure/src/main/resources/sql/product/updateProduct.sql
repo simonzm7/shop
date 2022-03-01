@@ -1,0 +1,1 @@
+UPDATE products SET product_name = :productName, description = :description, product_category = :productCategory, product_image_url = :productImageUrl, product_stock = :productStock, product_discount = :productDiscount, user_id = :userId WHERE id = :id AND user_id = :userId

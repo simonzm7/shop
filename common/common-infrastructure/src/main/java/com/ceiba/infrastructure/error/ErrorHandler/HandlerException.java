@@ -33,6 +33,7 @@ public class HandlerException {
         STATUS_CODE.put(DuplicatedException.class.getSimpleName(), HttpStatus.BAD_REQUEST.value());
         STATUS_CODE.put(TechnicalException.class.getSimpleName(), HttpStatus.BAD_REQUEST.value());
         STATUS_CODE.put(IncorrectCredentials.class.getSimpleName(), HttpStatus.BAD_REQUEST.value());
+        STATUS_CODE.put(NotFoundException.class.getSimpleName(), HttpStatus.BAD_REQUEST.value());
         STATUS_CODE.put(HttpMessageNotReadableException.class.getSimpleName(), HttpStatus.BAD_REQUEST.value());
     }
 

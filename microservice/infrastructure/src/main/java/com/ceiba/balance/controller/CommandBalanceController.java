@@ -7,10 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/balance")
@@ -23,7 +20,7 @@ public class CommandBalanceController {
         return SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
     }
 
-    @PutMapping
+    @PostMapping
     public ResponseEntity<?> addBalance(@RequestBody BalanceCommand command){
         command.setUserEmail(this.getUser());
         this.addBalanceHandler.execute(command);

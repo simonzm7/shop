@@ -1,0 +1,72 @@
+<div class="container">
+    <div class="login-wrapper">
+        <p class="title">Sign Up</p>
+        <div class="login-items">
+            <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
+                <div class="input-wrapper">
+                    <label for="email">Name</label>
+                    <input type="text" name="name" class="formInput" [(ngModel)]="signupInput.name" required
+                        #name="ngModel" [ngClass]="{ errorOutline: name.invalid && (name.dirty || name.touched)}"
+                        [pattern]="patterns.name">
+                    <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert">
+                        <div *ngIf="name.errors?.['required']">
+                            <p class="error-text">Name is required.</p>
+                        </div>
+                        <div *ngIf="name.errors?.['pattern']">
+                            <p class="error-text">Invalid name format.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-wrapper">
+                    <label for="email">Email</label>
+                    <input type="text" name="email" class="formInput" [(ngModel)]="signupInput.email" required
+                        #email="ngModel" [ngClass]="{ errorOutline: email.invalid && (email.dirty || email.touched)}"
+                        [pattern]="patterns.email">
+                    <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert">
+                        <div *ngIf="email.errors?.['required']">
+                            <p class="error-text">Email is required.</p>
+                        </div>
+                        <div *ngIf="email.errors?.['pattern']">
+                            <p class="error-text">Invalid email format.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-wrapper">
+                    <label for="nationalIdentity">National identity</label>
+                    <input type="text" name="nationalIdentity" class="formInput" [(ngModel)]="signupInput.countryId" required
+                        #nationalIdentity="ngModel" 
+                        [ngClass]="{ errorOutline: nationalIdentity.invalid && (nationalIdentity.dirty || nationalIdentity.touched)}"
+                        [pattern]="patterns.nationalIdentity"
+                        minlength="10"
+                        maxlength="10"
+                        >
+                    <div *ngIf="nationalIdentity.invalid && (nationalIdentity.dirty || nationalIdentity.touched)" class="alert">
+                        <div *ngIf="nationalIdentity.errors?.['required']">
+                            <p class="error-text">National Identity is required.</p>
+                        </div>
+                        <div *ngIf="nationalIdentity.errors?.['pattern']">
+                            <p class="error-text">Invalid National Identity format.</p>
+                        </div>
+                        <div *ngIf="nationalIdentity.errors?.['minlength']">
+                            <p class="error-text">National Identity must be at least 10 characters long.</p>
+                        </div> 
+                    </div>
+                </div>
+                <div class="input-wrapper">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" class="formInput" [(ngModel)]="signupInput.password" required
+                        minlength="6" #password="ngModel">
+                        <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert">
+                            <div *ngIf="password.errors?.['required']">
+                                <p class="error-text">Password is required.</p>
+                            </div>
+                            <div *ngIf="password.errors?.['minlength']">
+                                <p class="error-text">Password must be at least 6 characters long.</p>
+                            </div>
+                        </div>
+                </div>
+                <button type="submit" class="submitBtn" [disabled]="loginForm.invalid">Sign Up</button>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,1 @@
+DELETE FROM products WHERE id = :productId AND user_id = :userId

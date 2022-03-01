@@ -1,0 +1,1 @@
+INSERT INTO products(product_name, description, product_category, product_image_url, product_stock, product_discount, user_id) VALUES(:productName, :description, :productCategory, :productImageUrl, :productStock, :productDiscount, :userId)
