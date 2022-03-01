@@ -14,7 +14,7 @@ pipeline{
     environment {
         PROJECT_PATH_BACK = './microservice'
         BRANCH_NAME = 'develop'
-        PROJECT_PATH_FRONT = './microservice/shop-angular'
+        PROJECT_PATH_FRONT = './shop-angular'
     }
 	
     triggers {
